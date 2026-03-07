@@ -1,0 +1,892 @@
+\documentclass[11pt,letterpaper,reqno]{amsart}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta, calc, positioning}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{enumitem} 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{doi}
+\usepackage{float} 
+\usepackage{comment} 
+\addtolength{\hoffset}{-1.5cm}\addtolength{\textwidth}{3cm}
+\addtolength{\voffset}{-1cm}\addtolength{\textheight}{2cm}
+
+\usepackage{bookmark}
+\usepackage{hyperref}
+\hypersetup{pdfstartview={FitH}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{| #1 |}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{Tr}}
+\DeclareMathOperator{\rank}{rank}
+
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}{Claim}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\numberwithin{equation}{section}
+
+\newcommand{\snorm}[1]{\lVert#1\rVert}
+\newcommand{\sang}[1]{\langle #1 \rangle}
+\newcommand{\pvec}[1]{{\vec{#1}\,}'}
+\newcommand{\avec}[1]{{\vec{#1}\,}^\ast}
+\newcommand{\evec}[2]{{\vec{#1}\,}^{#2}}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\mb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbm}{\mathbbm}
+\newcommand{\mc}{\mathcal}
+\newcommand{\mf}{\mathfrak}
+\newcommand{\mr}{\mathrm}
+\newcommand{\msc}{\mathscr}
+\newcommand{\ol}{\overline}
+\newcommand{\on}{\operatorname}
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\edit}[1]{{\color{red}#1}}
+\newcommand{\imod}[1]{~\mathrm{mod}~#1}
+
+
+% \left(\right) should behave the same as ()
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+\newcommand{\tO}{\wt{\Omega}}
+\newcommand{\wtilde}{\widetilde}
+\renewcommand{\Re}{\mathrm{Re}}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\taufunc}{\tau}
+\newcommand{\omegap}{\omega}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\R}{\mathbb{R}}        % real numbers
+\newcommand{\E}{\mathbb{E}}        % expectation
+\newcommand{\Var}{\mathrm{Var}}    % variance
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\PP}{\mathbb{P}}     % probability
+\newcommand{\eps}{\varepsilon}     % epsilon
+\newcommand{\ind}{\mathbf{1}}      % indicator function
+\newcommand{\seq}[1]{\left(#1\right)} % sequence
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\li}{\operatorname{li}}
+\newcommand{\leg}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\muo}{\mu}
+\newcommand{\ph}{\varphi}
+\newcommand{\ta}{\tau}
+
+\makeatother
+
+
+\begin{document}
+
+
+\title{A note on Problem~\#650}
+
+
+
+
+
+\date{\today}
+
+
+
+\maketitle
+
+
+
+
+
+
+
+
+
+
+\section{Introduction}
+
+
+
+
+For each positive integer $m$, let $f(m)$ be the largest integer with the following property:
+
+\medskip
+
+\noindent
+whenever
+\[
+A=\{a_1<\cdots<a_m\}
+\]
+is a set of $m$ positive integers and $x\in\mathbb{R}$, the open interval
+\[
+I=(x,x+2a_m)
+\]
+contains distinct integers $b_1,\dots,b_r$ and distinct elements $c_1,\dots,c_r\in A$
+such that
+\[
+c_i\mid b_i\qquad (1\le i\le r),
+\]
+with
+\[
+r\ge f(m).
+\]
+
+
+In this note, we determine $f(m)$ for all $m\ge 4$, proving that
+\[
+f(m)=\lceil 2\sqrt m\rceil
+\qquad (m\ge 4).
+\]
+
+\section{Upper bound}
+
+\begin{theorem}\label{thm:upper-st}
+For all integers $s,t\ge 1$, one has
+\[
+f(st)\le s+t.
+\]
+Consequently, for every $m\ge 4$,
+\[
+f(m)\le \lceil 2\sqrt m\rceil.
+\]
+\end{theorem}
+
+\begin{proof}
+We first prove that
+\[
+f(st)\le s+t
+\qquad (s,t\ge 1).
+\]
+
+If $s=1$ or $t=1$, then trivially
+\[
+f(st)\le st\le s+t,
+\]
+so we may assume $s,t\ge 2$.
+
+Define
+\[
+E:=\prod_{p\le st} p^{\,1+\lfloor \log_p(s-1)\rfloor},
+\qquad
+D:=E\cdot \operatorname{lcm}(1,2,\dots,st).
+\]
+Then for every prime $p\le st$ and every integer $\delta$ with
+\[
+1\le |\delta|\le s-1,
+\]
+we have
+\[
+v_p(D)>v_p(\delta),
+\]
+where $v_p(\cdot)$ denotes the $p$-adic valuation. Indeed,
+\[
+v_p(\delta)\le \lfloor \log_p(s-1)\rfloor,
+\]
+whereas the exponent of $p$ in $E$ is
+\[
+1+\lfloor \log_p(s-1)\rfloor.
+\]
+
+Next let
+\[
+\mathcal P:=
+\Bigl\{
+p>st:\ p \text{ is prime and } p\mid (qD+\delta)
+\text{ for some }1\le q\le t-1,\ 1\le |\delta|\le s-1
+\Bigr\}.
+\]
+This is a finite set of primes.
+
+For each $p\in\mathcal P$, consider the residue classes
+\[
+i-jD \pmod p
+\qquad (1\le i\le s,\ 0\le j\le t-1).
+\]
+There are at most $st$ such classes, whereas $p>st$, so they do not exhaust all
+residue classes modulo $p$. Hence we may choose a residue class
+\[
+r_p \pmod p
+\]
+such that
+\[
+r_p\not\equiv i-jD\pmod p
+\qquad (1\le i\le s,\ 0\le j\le t-1).
+\]
+
+By the Chinese remainder theorem, there exists an integer $M$ such that
+\[
+M\equiv r_p \pmod p
+\qquad (\forall p\in\mathcal P),
+\]
+and also
+\[
+M>2(t-1)D+4s.
+\]
+
+For $1\le i\le s$ and $0\le j\le t-1$, define
+\[
+\alpha_{i,j}:=M+jD-i.
+\]
+These integers are pairwise distinct. Indeed, if
+\[
+M+jD-i=M+\ell D-k,
+\]
+then
+\[
+(j-\ell)D=i-k.
+\]
+Since
+\[
+|i-k|<s\le st\le D,
+\]
+we must have $j=\ell$, and then $i=k$.
+
+Now set
+\[
+A:=\{\alpha_{i,j}:1\le i\le s,\ 0\le j\le t-1\},
+\qquad
+N:=M+(t-1)D-1.
+\]
+Then $|A|=st$, and the largest element of $A$ is exactly $N$, since
+\[
+\alpha_{1,t-1}=M+(t-1)D-1=N.
+\]
+
+We claim that for any two pairs $(i,j)$ and $(k,\ell)$,
+\[
+\gcd(\alpha_{i,j},\alpha_{k,\ell})\mid (k-i).
+\]
+Let
+\[
+d:=\gcd(\alpha_{i,j},\alpha_{k,\ell}).
+\]
+Since
+\[
+\alpha_{i,j}-\alpha_{k,\ell}=(j-\ell)D+(k-i),
+\]
+we have
+\[
+d\mid (j-\ell)D+(k-i).
+\]
+
+There is nothing to prove if $i=k$, and if $j=\ell$ then immediately
+\[
+d\mid (k-i).
+\]
+So assume $i\ne k$ and $j\ne \ell$.
+Put
+\[
+q:=|j-\ell|\in\{1,\dots,t-1\},
+\]
+and define
+\[
+\delta=
+\begin{cases}
+k-i,& j>\ell,\\
+i-k,& j<\ell.
+\end{cases}
+\]
+Then
+\[
+d\mid qD+\delta,
+\qquad
+1\le |\delta|=|k-i|\le s-1.
+\]
+
+We first show that every prime divisor of $d$ is at most $st$.
+Suppose, for contradiction, that some prime $p>st$ divides $d$.
+Since
+\[
+p\mid d\mid qD+\delta,
+\]
+we have $p\in\mathcal P$ by definition of $\mathcal P$.
+On the other hand,
+\[
+p\mid d\mid \alpha_{i,j}=M+jD-i,
+\]
+so
+\[
+M\equiv i-jD \pmod p,
+\]
+contradicting the choice of $M\equiv r_p\pmod p$.
+
+Thus every prime divisor of $d$ is at most $st$.
+Now let $p\le st$ be any prime.
+Since
+\[
+v_p(qD)\ge v_p(D)>v_p(\delta),
+\]
+it follows that
+\[
+v_p(qD+\delta)=v_p(\delta).
+\]
+Because $d\mid qD+\delta$, we obtain
+\[
+v_p(d)\le v_p(qD+\delta)=v_p(\delta)=v_p(k-i).
+\]
+Since all prime divisors of $d$ are at most $st$, we conclude that
+\[
+d\mid (k-i).
+\]
+This proves the claim.
+
+Consequently, the system of congruences
+\[
+x\equiv -i \pmod{\alpha_{i,j}}
+\qquad (1\le i\le s,\ 0\le j\le t-1)
+\]
+is pairwise compatible: for any two congruences in the system, the difference
+of the residues is
+\[
+(-i)-(-k)=k-i,
+\]
+and this is divisible by $\gcd(\alpha_{i,j},\alpha_{k,\ell})$.
+Hence, by the generalized Chinese remainder theorem, the system has a solution,
+say $x_0$.
+
+Choose an integer $T$ such that
+\[
+2\bigl((t-1)D+s-1\bigr)<T\le M-2s.
+\]
+Such a choice is possible because
+\[
+M>2(t-1)D+4s.
+\]
+
+Consider the open interval
+\[
+I:=(x_0-T,\ x_0-T+2N).
+\]
+
+Fix $(i,j)$ with $1\le i\le s$ and $0\le j\le t-1$.
+Since
+\[
+x_0\equiv -i\pmod{\alpha_{i,j}},
+\]
+we have
+\[
+\alpha_{i,j}\mid (x_0+i).
+\]
+Also,
+\[
+x_0+M+jD=(x_0+i)+\alpha_{i,j},
+\]
+so $x_0+M+jD$ is another multiple of $\alpha_{i,j}$.
+
+We now show that these are exactly the two multiples of $\alpha_{i,j}$ contained in $I$.
+
+First, both of them lie in $I$.
+Indeed, the offset of $x_0+i$ from the left endpoint is
+\[
+T+i,
+\]
+which is positive and satisfies
+\[
+T+i\le T+s\le M-s<2N.
+\]
+Hence
+\[
+x_0+i\in I.
+\]
+
+Similarly, the offset of $x_0+M+jD$ from the left endpoint is
+\[
+T+M+jD,
+\]
+which is positive. Moreover,
+\[
+T+M+jD\le T+M+(t-1)D\le (M-2s)+M+(t-1)D<2N,
+\]
+because
+\[
+2N=2M+2(t-1)D-2
+\]
+and $s,t\ge 2$.
+
+Next, the preceding multiple of $\alpha_{i,j}$ is
+\[
+(x_0+i)-\alpha_{i,j},
+\]
+whose offset from the left endpoint is
+\[
+T+i-\alpha_{i,j}.
+\]
+But
+\[
+\alpha_{i,j}=M+jD-i\ge M-s,
+\]
+and
+\[
+T+i\le T+s\le M-s\le \alpha_{i,j},
+\]
+so
+\[
+T+i-\alpha_{i,j}\le 0.
+\]
+Hence this preceding multiple does not belong to $I$.
+
+Finally, the next multiple after $x_0+M+jD$ is
+\[
+(x_0+i)+2\alpha_{i,j},
+\]
+whose offset from the left endpoint is
+\[
+T+i+2\alpha_{i,j}\ge T+1+2(M-s).
+\]
+Using
+\[
+T>2\bigl((t-1)D+s-1\bigr)=2(t-1)D+2s-2,
+\]
+we obtain
+\[
+T+i+2\alpha_{i,j}
+>
+2(t-1)D+2s-2+1+2M-2s
+=
+2M+2(t-1)D-1
+>
+2N,
+\]
+because
+\[
+2N=2M+2(t-1)D-2.
+\]
+Therefore this next multiple also lies outside $I$.
+
+Thus $\alpha_{i,j}$ has exactly two multiples in $I$, namely
+\[
+x_0+i
+\qquad\text{and}\qquad
+x_0+M+jD.
+\]
+
+It follows that every integer in $I$ divisible by some element of $A$ lies in
+\[
+B:=\{x_0+i:1\le i\le s\}\cup \{x_0+M+jD:0\le j\le t-1\}.
+\]
+These two parts are disjoint, because
+\[
+x_0+i=x_0+M+jD
+\]
+would imply
+\[
+i=M+jD,
+\]
+which is impossible since $1\le i\le s<M\le M+jD$.
+Hence
+\[
+|B|=s+t.
+\]
+
+Therefore, inside the interval $I$, there are at most $s+t$ integers divisible
+by some element of $A$. In particular, there cannot exist a matching from $A$
+into $I\cap\mathbb Z$ of size larger than $s+t$. Hence
+\[
+f(st)\le s+t.
+\]
+
+Now let $m\ge 1$, and put $n:=\lceil 2\sqrt m\rceil \geq 4$.
+Choose
+\[
+s:=\left\lfloor \frac n2\right\rfloor,
+\qquad
+t:=\left\lceil \frac n2\right\rceil.
+\]
+Then
+\[
+s+t=n=\lceil 2\sqrt m\rceil
+\]
+and
+\[
+st=\left\lfloor \frac{n^2}{4}\right\rfloor\ge m,
+\]
+because $n\ge 2\sqrt m$.
+
+Applying the construction above, we obtain a set $A$ of size $st$ whose largest
+element is $N$, together with an open interval of length $2N$, such that at
+most $s+t$ integers in that interval are divisible by some element of $A$.
+
+Choose any subset $A'\subseteq A$ with
+\[
+|A'|=m
+\qquad\text{and}\qquad
+N\in A'.
+\]
+Then $\max A'=N$, and the same interval has length $2\max A'$.
+Moreover, the set of integers in that interval divisible by some element of $A'$
+is contained in the corresponding set for $A$, so it still has cardinality at
+most $s+t$.
+Therefore
+\[
+f(m)\le s+t=\lceil 2\sqrt m\rceil.
+\]
+This completes the proof.
+\end{proof}
+
+\section{Lower bound}
+
+\begin{theorem}\label{thm:lower}
+Let $m\ge 4$, let
+\[
+A=\{a_1<\cdots<a_m\},
+\qquad
+N:=a_m,
+\]
+and let
+\[
+I=(x,x+2N).
+\]
+Then there exist distinct
+\[
+c_1,\dots,c_L\in A
+\qquad\text{and}\qquad
+b_1,\dots,b_L\in I\cap\mathbb Z
+\]
+such that
+\[
+c_i\mid b_i\qquad (1\le i\le L),
+\]
+where
+\[
+L:=\lceil 2\sqrt m\rceil.
+\]
+Consequently,
+\[
+f(m)\ge \lceil 2\sqrt m\rceil
+\qquad (m\ge 4).
+\]
+\end{theorem}
+
+\begin{proof}
+We distinguish two cases.
+
+\medskip
+
+\noindent
+\textbf{Case 1: $x$ is not an integer multiple of $N$.}
+
+Let
+\[
+B:=I\cap\mathbb Z,
+\qquad
+B_-:=(x,x+N]\cap\mathbb Z,
+\qquad
+B_+:=(x+N,x+2N)\cap\mathbb Z.
+\]
+Then
+\[
+B=B_-\sqcup B_+.
+\]
+
+Form the bipartite graph $G$ with left vertex set $A$ and right vertex set $B$,
+where $a\in A$ is joined to $b\in B$ if and only if $a\mid b$.
+For $S\subseteq A$, let $\Gamma(S)$ denote the neighbourhood of $S$ in $G$, and put
+\[
+\Gamma_-(S):=\Gamma(S)\cap B_-,
+\qquad
+\Gamma_+(S):=\Gamma(S)\cap B_+.
+\]
+
+We claim that for every nonempty subset $S\subseteq A$,
+\[
+|S|\le |\Gamma_-(S)|\,|\Gamma_+(S)|.
+\]
+Fix such an $S$.
+For each $a\in S$, let $u_a$ be the smallest multiple of $a$ that is strictly greater than $x$,
+and let $v_a$ be the largest multiple of $a$ that is strictly less than $x+2N$.
+
+Since $a\le N$, we have
+\[
+x<u_a\le x+a\le x+N,
+\]
+so $u_a\in B_-$.
+
+Also, if $a<N$, then
+\[
+x+2N-a<v_a<x+2N,
+\]
+hence
+\[
+v_a>x+2N-a>x+N,
+\]
+so $v_a\in B_+$.
+If $a=N$, then $x\notin N\mathbb Z$ implies that $x+N$ is not a multiple of $N$;
+therefore the largest multiple of $N$ below $x+2N$ is strictly larger than $x+N$,
+and again $v_a\in B_+$.
+Thus every $a\in S$ has at least one multiple in $B_-$ and at least one multiple in $B_+$.
+
+Let $c_a$ be the largest multiple of $a$ lying in $B_-$.
+Then $c_a+a$ is the next multiple of $a$ after $c_a$.
+Since $v_a\in B_+$ is also a multiple of $a$ and satisfies $v_a>c_a$, we have
+\[
+c_a+a\le v_a<x+2N.
+\]
+On the other hand, by maximality of $c_a$ in $B_-$, the next multiple $c_a+a$
+cannot belong to $B_-$, so
+\[
+c_a+a>x+N.
+\]
+Hence
+\[
+c_a+a\in B_+.
+\]
+
+Therefore
+\[
+(c_a,c_a+a)\in \Gamma_-(S)\times \Gamma_+(S).
+\]
+Define
+\[
+\phi:S\to \Gamma_-(S)\times \Gamma_+(S),
+\qquad
+\phi(a):=(c_a,c_a+a).
+\]
+This map is injective, because the difference of the two coordinates is exactly $a$:
+\[
+(c_a+a)-c_a=a.
+\]
+Hence
+\[
+|S|\le |\Gamma_-(S)|\,|\Gamma_+(S)|.
+\]
+
+Now let $S\subseteq A$ be nonempty, and write
+\[
+s:=|S|,
+\qquad
+r:=|\Gamma(S)|.
+\]
+Since $\Gamma_-(S)$ and $\Gamma_+(S)$ are disjoint subsets of $\Gamma(S)$, we have
+\[
+|\Gamma_-(S)|+|\Gamma_+(S)|\le r.
+\]
+By the elementary inequality
+\[
+uv\le \left\lfloor \frac{(u+v)^2}{4}\right\rfloor
+\qquad (u,v\in \mathbb Z_{\ge 0}),
+\]
+it follows that
+\[
+s\le |\Gamma_-(S)|\,|\Gamma_+(S)|
+\le \left\lfloor \frac{r^2}{4}\right\rfloor.
+\]
+Therefore
+\begin{equation}\label{eq:gamma-lower-case1}
+|\Gamma(S)|\ge \lceil 2\sqrt{|S|}\rceil
+\qquad\text{for every nonempty }S\subseteq A.
+\end{equation}
+
+Since $m\ge 4$, we have $L=\lceil 2\sqrt m\rceil\le m$.
+Set
+\[
+d:=m-L\ge 0.
+\]
+Adjoin $d$ new vertices to the right-hand side of $G$, each adjacent to every
+vertex of $A$, and call the resulting bipartite graph $G'$.
+
+We claim that Hall's condition holds in $G'$.
+For $t\ge 1$, define
+\[
+h(t):=t-\lceil 2\sqrt t\rceil.
+\]
+Because
+\[
+0<2\sqrt{t+1}-2\sqrt t<1
+\qquad (t\ge 1),
+\]
+we have
+\[
+\lceil 2\sqrt{t+1}\rceil-\lceil 2\sqrt t\rceil\le 1,
+\]
+and hence
+\[
+h(t+1)-h(t)
+=
+1-\bigl(\lceil 2\sqrt{t+1}\rceil-\lceil 2\sqrt t\rceil\bigr)\ge 0.
+\]
+So $h$ is nondecreasing on the positive integers.
+
+Now let $S\subseteq A$ be nonempty.
+Using \eqref{eq:gamma-lower-case1}, we obtain
+\[
+|S|-|\Gamma(S)|
+\le |S|-\lceil 2\sqrt{|S|}\rceil
+= h(|S|)
+\le h(m)
+= m-\lceil 2\sqrt m\rceil
+= d.
+\]
+Hence
+\[
+|\Gamma(S)|+d\ge |S|.
+\]
+Since every dummy vertex is adjacent to every element of $A$, it follows that
+\[
+|\Gamma_{G'}(S)|\ge |\Gamma(S)|+d\ge |S|.
+\]
+The case $S=\varnothing$ is trivial.
+Thus Hall's theorem yields a matching in $G'$ saturating all $m$ vertices of $A$.
+
+At most $d$ edges of this matching can end at the $d$ dummy vertices.
+After deleting those edges, we obtain a matching in the original graph $G$ of size at least
+\[
+m-d=L.
+\]
+This proves the theorem in Case~1.
+
+\medskip
+
+\noindent
+\textbf{Case 2: $x$ is an integer multiple of $N$.}
+
+Then $N$ has exactly one multiple in $I$, namely
+\[
+b_0:=x+N.
+\]
+Set
+\[
+A_0:=A\setminus\{N\},
+\qquad
+B_-:=(x,x+N)\cap\mathbb Z,
+\qquad
+B_+:=(x+N,x+2N)\cap\mathbb Z,
+\]
+and
+\[
+B_0:=B_-\sqcup B_+=(I\cap\mathbb Z)\setminus\{b_0\}.
+\]
+
+Form the bipartite graph $G_0$ with left vertex set $A_0$ and right vertex set $B_0$,
+where $a\in A_0$ is joined to $b\in B_0$ if and only if $a\mid b$.
+For $S\subseteq A_0$, let $\Gamma_0(S)$ denote the neighbourhood of $S$ in $G_0$.
+
+We claim that for every nonempty subset $S\subseteq A_0$,
+\[
+|\Gamma_0(S)|\ge \lceil 2\sqrt{|S|}\rceil.
+\]
+Indeed, fix such an $S$.
+Since every $a\in S$ satisfies $a<N$, the smallest multiple of $a$ strictly greater than $x$
+belongs to $B_-$, because
+\[
+x<u_a\le x+a<x+N.
+\]
+Likewise, the largest multiple of $a$ strictly less than $x+2N$ belongs to $B_+$, because
+\[
+x+2N-a<v_a<x+2N
+\]
+and
+\[
+x+2N-a>x+N.
+\]
+Now repeat verbatim the argument from Case~1: for each $a\in S$, if $c_a$ denotes the largest
+multiple of $a$ in $B_-$, then $c_a+a\in B_+$, and the map
+\[
+a\mapsto (c_a,c_a+a)
+\]
+is injective from $S$ into $\Gamma_0(S)\cap B_-\;\times\;\Gamma_0(S)\cap B_+$.
+Therefore
+\[
+|S|\le |\Gamma_0(S)\cap B_-|\,|\Gamma_0(S)\cap B_+|
+\le \left\lfloor \frac{|\Gamma_0(S)|^2}{4}\right\rfloor,
+\]
+which implies
+\[
+|\Gamma_0(S)|\ge \lceil 2\sqrt{|S|}\rceil.
+\]
+
+If $m=4$, then $|A_0|=3$.
+For every subset $S\subseteq A_0$ we have
+\[
+|\Gamma_0(S)|\ge \lceil 2\sqrt{|S|}\rceil\ge |S|,
+\]
+because $|S|\le 3$.
+Hence Hall's theorem gives a matching in $G_0$ saturating all three vertices of $A_0$.
+Together with the edge $N\sim b_0$, we obtain a matching of size
+\[
+3+1=4=L.
+\]
+
+So it remains to consider $m\ge 5$.
+Set
+\[
+L_0:=\lceil 2\sqrt{m-1}\rceil,
+\qquad
+d_0:=(m-1)-L_0.
+\]
+Since $m-1\ge 4$, we have $L_0\le m-1$, so $d_0\ge 0$.
+
+Adjoin $d_0$ new vertices to the right-hand side of $G_0$, each adjacent to every
+vertex of $A_0$, and call the resulting bipartite graph $G_0'$.
+Exactly as in Case~1, the bound
+\[
+|\Gamma_0(S)|\ge \lceil 2\sqrt{|S|}\rceil
+\qquad (\varnothing\ne S\subseteq A_0)
+\]
+implies Hall's condition in $G_0'$.
+Hence $G_0'$ has a matching saturating all $m-1$ vertices of $A_0$.
+Deleting the edges incident to the dummy vertices, we obtain a matching in $G_0$
+of size at least
+\[
+(m-1)-d_0=L_0.
+\]
+
+Now add the edge $N\sim b_0$.
+Because $b_0\notin B_0$, this enlarges the matching by one.
+Hence we obtain a matching in the original graph of size at least
+\[
+L_0+1=\lceil 2\sqrt{m-1}\rceil+1.
+\]
+Finally,
+\[
+0<2\sqrt m-2\sqrt{m-1}<1,
+\]
+so
+\[
+\lceil 2\sqrt m\rceil\le \lceil 2\sqrt{m-1}\rceil+1=L_0+1.
+\]
+Therefore the matching has size at least
+\[
+L=\lceil 2\sqrt m\rceil.
+\]
+This completes the proof in Case~2, and hence the theorem.
+\end{proof}
+
+\begin{corollary}
+For every integer $m\ge 4$,
+\[
+f(m)=\lceil 2\sqrt m\rceil.
+\]
+\end{corollary}
+
+\begin{proof}
+The upper bound follows from Theorem~\ref{thm:upper-st}, and the lower bound
+follows from Theorem~\ref{thm:lower}.
+\end{proof}
+
+
+
+
+
+\end{document}
